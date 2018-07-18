@@ -84,6 +84,8 @@ img {
   padding: 10px 8px;
 }
 
+/* Present Issue: Menu Changes size when clicked. */
+
 .menu ul {
   display: grid;
   grid-gap: 10px;
@@ -103,6 +105,11 @@ img {
   text-transform: uppercase;
   font-size: 20px;
 }
+
+.menu button {
+  display: none;
+}
+
 
 
 [aria-controls="menu-list"] {
@@ -183,6 +190,10 @@ img {
   .menu {
     order: -1;
     perspective: 800px;
+  }
+
+  .menu button {
+    display: block;
   }
 
   [aria-controls="menu-list"] {
