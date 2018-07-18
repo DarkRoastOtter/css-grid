@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../assets/style2.css">
+  <link
+    rel="stylesheet"
+    href="https://use.fontawesome.com/releases/v5.1.0/css/all.css"
+    integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt"
+    crossorigin="anonymous"
+  >
+  <title>Sizing Tracks in CSS Grid!</title>
+</head>
+
+<body>
+  <div class="container">
+    <div class="item item1">
+      <div class="navbar2">
+        <div class="navbar">
+            <i class="fa fa-home"></i>Home
+          </div>
+          <div class="navbar">
+            <i class="fas fa-bell"></i>Notifications
+          </div>
+          <div class="navbar">
+            <i class="fas fa-envelope"></i>Messages
+          </div>
+          <div class="bird navbar">
+            <i class="fab fa-twitter"></i>
+          </div>
+          <div class="navbar">
+            <form>
+              <input placeholder="search"/>
+              <button><i class="fa fa-search"></i></button>
+            </form>
+          </div>
+        </div>
+<!--       <ul class="navbar" role="navigation">
+        <div class="navbar">
+          <i class="fa fa-home"></i>Home
+        </div>
+        <div class="navbar">
+          <i class="fas fa-bell"></i>Notifications
+        </div>
+        <div class="navbar">
+          <i class="fas fa-envelope"></i>Messages
+        </div>
+        <div class="bird navbar">
+          <i class="fab fa-twitter"></i>
+        </div>
+        <div class="navbar">
+          <form>
+            <input placeholder="search"/>
+            <button><i class="fa fa-search"></i></button>
+          </form>
+        </div>
+      </ul> -->
+    </div>
+    <div class="item item2">Empty / Sidebar</div>
+    <div class="item item3">
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque cursus risus bibendum lorem vehicula, sed fringilla tellus tincidunt. Sed ac aliquam ipsum. Nam accumsan, neque nec tempor commodo, tortor dolor congue mi, ut rutrum purus lacus sit amet risus. Curabitur pretium eleifend nulla vel condimentum. Duis a aliquet nisi. Cras viverra justo quis imperdiet consequat. Aenean sapien purus, pharetra eget nisi consequat, scelerisque tempus ex. Nullam mauris eros, blandit nec enim at, ultricies interdum felis. Etiam consectetur semper lacinia. Integer cursus vitae dolor quis tincidunt.
+      </p>
+      <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque cursus risus bibendum lorem vehicula, sed fringilla tellus tincidunt. Sed ac aliquam ipsum. Nam accumsan, neque nec tempor commodo, tortor dolor congue mi, ut rutrum purus lacus sit amet risus. Curabitur pretium eleifend nulla vel condimentum. Duis a aliquet nisi. Cras viverra justo quis imperdiet consequat. Aenean sapien purus, pharetra eget nisi consequat, scelerisque tempus ex. Nullam mauris eros, blandit nec enim at, ultricies interdum felis. Etiam consectetur semper lacinia. Integer cursus vitae dolor quis tincidunt.
+        </p>
+
+    </div>
+    <div class="item item4">Sidebar</div>
+    <div class="item item5">Footer</div>
+
+
+  </div>
+
+  <style>
+    .container {
+      display: grid;
+      grid-template-columns: 1fr minmax(330px, 700px) 1fr;
+    }
+
+    .item1 {
+      grid-column: span 3;
+      height: 120px;
+      background-color: rgb(111, 144, 153);
+    }
+
+    .item2 {
+      background-color: rgb(231, 222, 209);
+    }
+
+    .item3 {
+      background-color: white;
+      padding: 20px;
+    }
+
+    .item4 {
+      background-color: rgb(231, 222, 209);
+    }
+
+    .item5 {
+      grid-column: span 3;
+      height: 100px;
+      background-color: rgb(111, 144, 153);
+    }
+
+    .navbar {
+      display: grid;
+      grid-template-columns: 3fr 3fr 3fr 1fr 3fr;
+      grid-column-gap: 2px;
+      height: 50%;
+      width: 100%;
+      justify-content: center;
+      align-items: center;
+      margin: 0;
+      padding: 0;
+    }
+
+    .navbar2 {
+      display: flex;
+      width: 80%;
+      padding: 0;
+      margin: 0;
+      justify-content: center;
+      align-items: center;
+    }
+
+
+    .bird {
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    input {
+      display: inline;
+    }
+
+    form {
+      display: inline;
+    }
+
+    button {
+      display: inline;
+    }
+
+  </style>
+</body>
+
+</html>
