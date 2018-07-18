@@ -47,11 +47,81 @@
 
     .close {
       background: none;
-      color: white;
+      color: black;
       border: 0;
+      margin-bottom: 10px;
     }
 
-    .gallery {}
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, 100px);
+      grid-auto-rows: 100px;
+      grid-auto-flow: dense;
+    }
+
+    .item {
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 1;
+      grid-template-rows: 1;
+    }
+
+    .item img {
+      grid-column: 1 / -1;
+      grid-row: 1 / -1;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .item__overlay {
+      background: rgba(255, 99, 71, 0.308);
+      grid-column: 1 / -1;
+      grid-row: 1 / -1;
+      position: relative;
+      display: grid;
+      justify-items: center;
+      align-items: center;
+      transition: 0.5s;
+      transform: translateY(100%);
+    }
+
+    .item__overlay button {
+      background: none;
+      border: 2px solid white;
+      color: white;
+      text-transform: uppercase;
+      background: rgba(0, 0, 0, 0, 0.7);
+      padding: 5px;
+    }
+
+    .item:hover .item__overlay {
+      transform: translateY(0);
+    }
+
+    .item.v2 {
+      grid-row: span 2;
+    }
+
+    .item.v3 {
+      grid-row: span 3;
+    }
+
+    .item.v4 {
+      grid-row: span 4;
+    }
+
+    .item.h2 {
+      grid-column: span 2;
+    }
+
+    .item.h3 {
+      grid-column: span 3;
+    }
+
+    .item.h4 {
+      grid-column: span 4;
+    }
 
 
 
@@ -68,9 +138,11 @@
 
     .overlay.open {
       display: grid;
+      align-items: center;
+      justify-items: center;
     }
 
-    .overlay figure {
+    .overlay-inner {
       background: white;
       width: 700px;
       padding: 20px;
@@ -82,6 +154,76 @@
   </style>
 
   <script>
+// Create our constants and selectors for the gallery
+    const gallery = document.querySelector('.gallery');
+    const overlay = document.querySelector('.overlay');
+    const overlayImage = overlay.querySelector('img');
+    const overlayClose = overlay.querySelector('.close')
+
+// Provides the random value for picking an image.
+//If we add more images generateHTML needs to be updated with the new limit #
+
+    const randomNumber = limit => Math.floor(Math.random() * limit) +1;
+
+// Generate our div classes to apply to a randomly chosen image.
+    const generateHTML = ([h, v]) => {
+      return `
+        <div class="item h${h} v${v}">
+          <img src="images/${randomNumber(70)}.jpg">
+          <div class="item__overlay">
+            <button>View -></button>
+          </div>
+        </div>
+        `;
+    }
+
+// create function for handleclick eventlistener below
+// log it to make sure the target is being selected properly.
+// we need the source of the image to link it to the overlay
+// we look inside of the current target by using querySelector('img') so we can find the img tag
+// then use .src to grab the source attribute (the url/link) to that image from the img tag.
+// We grab the item, select it, look for img, if there is we grab the src, then console log to make sure it's working
+// Clean up console logs as they're no longer required.
+// Set the source of the overlayImage to the src of the target being clicked.
+// The overlayImage is the empty image at the top of the page that'll show the full-size image
+// add open class to overlay, turning it into a grid
+    const handleClick = e => {
+      const src = e.currentTarget.querySelector('img').src;
+      overlayImage.src = src;
+      overlay.classList.add('open');
+    }
+
+
+// remove class open of overlay, turning it into display:none
+    const close = () => overlay.classList.remove('open');
+
+// Make an empty array with 50 blank spots using .from and length object with 50 value
+// Create random numbers 1-4h and 1-4v in an array.
+// Concat another array of multiple [1,1] to fill in gaps.
+// May be algorithm to detect empty grid & fill in?
+    const digits = Array.from({length: 50}, () =>
+      [randomNumber(4), randomNumber(4)]).concat([[1,1],[1,1],[1,1],[1,1],[1,1],[1,1],[1,1],[1,1],[1,1],[1,1],[1,1],[1,1],[1,1],[1,1],[1,1],[1,1],[1,1],[1,1],[1,1],[1,1],[1,1],[1,1],[1,1],[1,1],[1,1],[1,1],[1,1],[1,1],[1,1],[1,1],[1,1],[1,1],[1,1]])
+
+// Create new array called html
+// Pass digits array to be mapped over
+// generateHTML takes the arrays and destructures them as h, v and generates the HTML within the return
+// .join('') to convert it to a string.
+// target gallery const, which itself targets the .gallery class
+// create the HTML provided by the html of the map function within the .gallery class
+// 50 random images (selected from & limited by our sources)
+    const html = digits.map(generateHTML).join('');
+    gallery.innerHTML = html;
+
+// create const for .item class
+// Could be placed above with the other consts, but would require event delegation
+    const items = document.querySelectorAll('.item');
+
+// loop over each item, adding an eventlistener that looks for a click and performs the handleClick function on click
+//
+    items.forEach(item => item.addEventListener('click', handleClick));
+
+    overlayClose.addEventListener('click', close);
+
   </script>
 </body>
 
